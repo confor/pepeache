@@ -17,9 +17,9 @@ function connect() {
     }
 }
 
-function select($con, $sql) {
+function select($con, $sql, $params) {
     $result = array();
-    $query = $con->query($sql);
+    $query = $con->execute_query($sql, $params);
 
     while ($row = $query->fetch_row()) {
         array_push($result, $row);
@@ -27,3 +27,4 @@ function select($con, $sql) {
 
     return $result;
 }
+

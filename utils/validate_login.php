@@ -13,9 +13,10 @@ $con = connect();
 $email = $_POST['email'];
 $pass = $_POST['pass'];
 
-$sql = 'SELECT * FROM usuario WHERE correo=\'' . $email . '\' AND password=\'' . $pass . '\'';
+$sql = 'SELECT * FROM usuario WHERE correo = ? AND password= ?';
+$params = [$email, $pass];
 
-$query = select($con, $sql);
+$query = select($con, $sql, $params);
 
 if (count($query) > 0) {
     $_SESSION['session'] = true;
