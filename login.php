@@ -46,6 +46,7 @@ if ($_SESSION['validate'] == NULL) {
                                                 echo '<div class="alert alert-danger d-flex align-items-center justify-content-start mt-4 mb-0" role="alert">
                                                         Credenciales incorrectas!
                                                     </div>';
+                                                $_SESSION['validate'] = 0;
                                             }
                                             ?>
                                             <div class="d-flex align-items-center justify-content-end mt-4 mb-0">

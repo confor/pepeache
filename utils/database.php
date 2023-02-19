@@ -28,3 +28,8 @@ function select($con, $sql, $params) {
     return $result;
 }
 
+function edit($con, $sql, $types, $params) {
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param($types, ...$params);
+    $stmt->execute();
+}

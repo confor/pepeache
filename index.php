@@ -1,11 +1,5 @@
 <?php
-include 'utils/database.php';
-
-session_start();
-
-if ($_SESSION['session'] != true) {
-    header('Location: login.php');
-}
+include 'utils/return_login.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,90 +25,49 @@ if ($_SESSION['session'] != true) {
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Tu cuenta</li>
                         </ol>
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        <?php
+                        if (strlen($_SESSION['userMessage']) > 0) {
+                            echo '<div class="row">
+                                    <div class="col-xl-3">
+                                        <div class="card text-white mb-4 bg-opacity-50 bg-success"> 
+                                            <div class="card-body">'.$_SESSION['userMessage'].'</div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Warning Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                </div>';
+                            $_SESSION['userMessage'] = '';
+                        }
+                        ?>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                DataTable Example
+                                Datos de tu cuenta
                             </div>
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <form class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="name" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="name" name="name" value="<?php echo $_SESSION['name'] ?>" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="rut" class="form-label">RUT</label>
+                                        <input type="text" class="form-control" id="rut" name="rut" value="<?php echo $_SESSION['rut'] ?>" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Correo electrónico</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $_SESSION['email'] ?>" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="password" class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="password" name="password" value="<?php echo $_SESSION['pass'] ?>" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="place" class="form-label">Lugar asociado</label>
+                                        <input type="text" class="form-control" id="place" name="place" value="<?php echo '*nombre de tu lugar*' ?>" readonly>
+                                    </div>
+                                    <div class="col-12 text-end">
+                                        <a href="editar_usuario.php" class="btn btn-secondary">Editar información</a>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
