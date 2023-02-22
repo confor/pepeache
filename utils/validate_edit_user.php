@@ -1,5 +1,7 @@
 <?php
 
+include 'return_login.php';
+
 include 'validate_rut.php';
 
 session_start();

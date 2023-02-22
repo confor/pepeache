@@ -1,5 +1,4 @@
 <?php
-include 'utils/database.php';
 
 session_start();
 
@@ -61,7 +60,7 @@ if ($_SESSION['validate'] == NULL) {
                 </main>
             </div>
             <?php
-            include('static/footer.html');
+            include 'static/footer.php';
             ?>
         </div>
     </body>

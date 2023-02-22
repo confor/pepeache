@@ -12,11 +12,11 @@ include 'utils/return_login.php';
     </head>
     <body class="sb-nav-fixed">
         <?php
-        include('static/navbar.html');
+        include 'static/navbar.php';
         ?>
         <div id="layoutSidenav">
             <?php
-            include('static/sidebar.php');
+            include 'static/sidebar.php';
             ?>  
             <div id="layoutSidenav_content">
                 <main>
@@ -73,7 +73,7 @@ include 'utils/return_login.php';
                     </div>
                 </main>
                 <?php
-                include('static/footer.html');
+                include 'static/footer.php';
                 ?>
             </div>
         </div>

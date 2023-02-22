@@ -29,10 +29,8 @@ if (count($query) > 0) {
     $_SESSION['ts'] = $query[0][6];
 
     $_SESSION['validate'] = 0;
-    echo $_SESSION['validate'];
     header('Location: ../index.php');
 } else {
     $_SESSION['validate'] = 1;
-    echo $_SESSION['validate'];
     header('Location: ../login.php');
 }

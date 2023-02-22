@@ -24,3 +24,7 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+funtion volverAgregar() {
+    console.log('Se vuelve a editar');
+}

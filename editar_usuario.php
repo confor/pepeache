@@ -12,7 +12,7 @@ include 'utils/return_login.php';
     </head>
     <body class="sb-nav-fixed">
         <?php
-        include('static/navbar.html');
+        include('static/navbar.php');
         ?>
         <div id="layoutSidenav">
             <?php
@@ -76,7 +76,7 @@ include 'utils/return_login.php';
                                             <input type="password" class="form-control" id="password" name="password" required>
                                         </div>
                                         <div class="col-md-12 text-end">
-                                            <input class="btn btn-light" type="submit" value="Cancelar">
+                                            <button class="btn btn-light" onclick="window.location.href='index.php'">Cancelar</button>
                                             <input class="btn btn-secondary" type="submit" value="Editar">
                                         </div>
                                     </div>
@@ -86,7 +86,7 @@ include 'utils/return_login.php';
                     </div>
                 </main>
                 <?php
-                include('static/footer.html');
+                include('static/footer.php');
                 ?>
             </div>
         </div>
