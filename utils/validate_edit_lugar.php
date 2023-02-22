@@ -12,19 +12,34 @@ include 'database.php';
 
 $con = connect();
 
-if (strlen($_POST['id_duenho']) == 0) {
-    $sql = 'INSERT INTO lugar (id_poly,nombre,descripcion,horario,etiquetas) VALUES (?,?,?,?,?)';
-    $params = array($_POST['id_poly'], $_POST['nombre'], $_POST['descripcion'], $_POST['horario'], $_POST['etiquetas']);
-    $types = 'issss';
-} else {
-    $sql = 'INSERT INTO lugar (id_poly,nombre,descripcion,horario,etiquetas,id_duenho) VALUES (?,?,?,?,?,?)';
-    $params = array($_POST['id_poly'], $_POST['nombre'], $_POST['descripcion'], $_POST['horario'], $_POST['etiquetas'], $_POST['id_duenho']);
-    $types = 'issssi';
+$sql = 'UPDATE lugar SET';
+
+$params = array();
+$types = '';
+foreach ($_POST as $key => $valor) {
+    if ($key != 'id_lugar') {
+        if ($key != 'id_duenho') {
+            $sql = $sql.' '.$key.'=?,';
+        } else {
+            $sql = $sql.' '.$key.'=?';
+        }
+        array_push($params, $valor);
+        if ($key == 'id_lugar' || $key == 'id_duenho' || $key == 'id_poly') {
+            $types = $types.'i';
+        } else {
+            $types = $types.'s';
+        }
+    }
 }
+$sql = $sql.' WHERE id_lugar=?';
+array_push($params, $_POST['id_lugar']);
+$types = $types.'i';
 
-insert($con, $sql, $types, $params);
+edit($con, $sql, $types, $params);
 
-$_SESSION['lugarMessage'] = 'Usuario insertado correctamente';
+$_SESSION['lugarMessage'] = 'Lugar editado correctamente';
 $_SESSION['lugarStatus'] = 'success';
+
+unset($_SESSION['editando']);
 
 header('Location: ../lugares.php');

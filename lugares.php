@@ -64,6 +64,7 @@ $_SESSION['lugares'] = select_all($con, $sql);
                                         if (isset($_SESSION['editando'])) {
                                             echo '
                                         <form class="row g-3" action="utils/validate_edit_lugar.php" method="post">
+                                            <input type="number" class="form-control" id="id_lugar" name="id_lugar" value="'.$_GET['a'].'" required hidden>
                                             <div class="col-md-6">
                                                 <label for="id_poly" class="form-label">ID OSM (Open Street Map)</label>
                                                 <input type="number" class="form-control" id="id_poly" name="id_poly" value="'.$_GET['b'].'" required>
@@ -78,7 +79,7 @@ $_SESSION['lugares'] = select_all($con, $sql);
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="url" class="form-label">URL foto (opcional)</label>
-                                                <input type="text" class="form-control" id="url" name="url" value="'.$_GET['e'].'">
+                                                <input type="text" class="form-control" id="url" name="url_foto" value="'.$_GET['e'].'">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="horario" class="form-label">Horario (Opcional)</label>
