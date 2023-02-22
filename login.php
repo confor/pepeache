@@ -61,7 +61,7 @@ if ($_SESSION['validate'] == NULL) {
                 </main>
             </div>
             <?php
-            include('footer.html');
+            include('static/footer.html');
             ?>
         </div>
     </body>

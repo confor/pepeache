@@ -3,17 +3,9 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Resumen</div>
-                <?php    
-                if ($_SESSION['admin'] == 0) {
-                    echo '<a class="nav-link" href="index.php">
-                            Tu cuenta
-                        </a>';    
-                } else {
-                    echo '<a class="nav-link" href="index.php">
-                            Todos los lugares
-                        </a>';
-                }
-                ?>
+                    <a class="nav-link" href="index.php">
+                        Tu cuenta
+                    </a>
                 <div class="sb-sidenav-menu-heading">Administrar</div>
                 <?php    
                 if ($_SESSION['admin'] == 0) {
@@ -27,7 +19,7 @@
                             Estadisticas del *nombre de tu lugar*
                         </a>';    
                 } else {
-                    echo '<a class="nav-link" href="">
+                    echo '<a class="nav-link" href="lugares.php">
                             Lugares
                         </a>
                         <a class="nav-link" href="">

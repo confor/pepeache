@@ -28,7 +28,24 @@ function select($con, $sql, $params) {
     return $result;
 }
 
+function select_all($con, $sql) {
+    $result = array();
+    $query = $con->execute_query($sql);
+
+    while ($row = $query->fetch_row()) {
+        array_push($result, $row);
+    }
+
+    return $result;
+}
+
 function edit($con, $sql, $types, $params) {
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param($types, ...$params);
+    $stmt->execute();
+}
+
+function insert($con, $sql, $types, $params) {
     $stmt = $con->prepare($sql);
     $stmt->bind_param($types, ...$params);
     $stmt->execute();

@@ -25,14 +25,14 @@ window.addEventListener('DOMContentLoaded', event => {
 
     const viewPass = document.getElementById('view_pass');
     const passInput = document.getElementById('new_password');
-    viewPass.addEventListener("click", function() {
-        if (viewPass.checked) {
-            passInput.type = 'text';
-        } else {
-            passInput.type = 'password';
-        }
-    });
+
+    if (viewPass != null) {
+        viewPass.addEventListener("click", function() {
+            if (viewPass.checked) {
+                passInput.type = 'text';
+            } else {
+                passInput.type = 'password';
+            }
+        });
+    }
 });
-
-
-view_pass
