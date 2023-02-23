@@ -1,8 +1,6 @@
 <?php
 
-session_start();
-
-include 'return_login.php';
+require 'return_login.php';
 
 if (strlen($_POST['id_poly']) == 0 || strlen($_POST['nombre']) == 0 || strlen($_POST['descripcion']) == 0 || strlen($_POST['etiquetas']) == 0 ) {
     header('Location: ../lugares.php');
@@ -18,10 +16,10 @@ if (strlen($_FILES['url_foto']['name']) > 0) {
     $allow_ext = array('jpg', 'jpeg', 'png');
 
     if (in_array($ext, $allow_ext)) {
-        $folder = 'img/';
-        $path = $_POST['nombre'];
+        // $folder = 'img/';
+        // $path = $_POST['nombre'];
 
-        move_uploaded_file($temp_ubi, 'a.png');
+        move_uploaded_file($temp_name, '/var/www/html/img/a.png');
     } else {
         echo 'extension INCORRECTA';
         $_SESSION['lugarMessage'] = 'Extensión de imagen no desponible (usar solo jpg, jpeg o png)';
@@ -32,7 +30,7 @@ if (strlen($_FILES['url_foto']['name']) > 0) {
     }
 }
 
-include 'database.php';
+require 'database.php';
 
 $con = connect();
 

@@ -1,10 +1,8 @@
 <?php
 
-include 'return_login.php';
+require 'return_login.php';
 
-include 'validate_rut.php';
-
-session_start();
+require 'validate_rut.php';
 
 if (strlen($_POST['name']) == 0 || strlen($_POST['rut']) == 0 || strlen($_POST['email']) == 0 || strlen($_POST['new_password']) == 0 || strlen($_POST['rep_new_password']) == 0 || strlen($_POST['password']) == 0) {
     header('Location: ../editar_usuario.php');
@@ -24,7 +22,7 @@ if ($_POST['password'] != $_SESSION['pass']) {
     header('Location: ../editar_usuario.php');
     exit();
 } else {
-    include 'database.php';
+    require 'database.php';
     
     $con = connect();
     

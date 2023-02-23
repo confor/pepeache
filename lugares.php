@@ -1,7 +1,7 @@
 <?php
-include 'utils/return_login.php';
+require 'utils/return_login.php';
 
-include 'utils/database.php';
+require 'utils/database.php';
 
 $con = connect();
 
@@ -21,11 +21,11 @@ $_SESSION['lugares'] = select_all($con, $sql);
     </head>
     <body class="sb-nav-fixed">
         <?php
-        include 'static/navbar.php';
+        require 'static/navbar.php';
         ?>
         <div id="layoutSidenav">
             <?php
-            include 'static/sidebar.php';
+            require 'static/sidebar.php';
             ?>  
             <div id="layoutSidenav_content">
                 <main>

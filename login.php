@@ -60,7 +60,7 @@ if ($_SESSION['validate'] == NULL) {
                 </main>
             </div>
             <?php
-            include 'static/footer.php';
+            require 'static/footer.php';
             ?>
         </div>
     </body>

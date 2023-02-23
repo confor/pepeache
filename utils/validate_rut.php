@@ -1,7 +1,5 @@
 <?php
 
-include 'return_login.php';
-
 function rut($rut) {
     if (!preg_match("/^[0-9.]+[-]?+[0-9kK]{1}/", $rut)) {
         return false;

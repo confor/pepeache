@@ -1,8 +1,6 @@
 <?php
 
-session_start();
-
-include 'return_login.php';
+require 'return_login.php';
 
 $_SESSION['editando'] = true;
 

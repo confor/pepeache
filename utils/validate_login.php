@@ -7,7 +7,7 @@ if (strlen($_POST['email']) == 0 || strlen($_POST['pass']) == 0) {
     exit();
 }
 
-include 'database.php';
+require 'database.php';
 
 $con = connect();
 

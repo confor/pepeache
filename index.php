@@ -1,5 +1,5 @@
 <?php
-include 'utils/return_login.php';
+require 'utils/return_login.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,11 +12,11 @@ include 'utils/return_login.php';
     </head>
     <body class="sb-nav-fixed">
         <?php
-        include 'static/navbar.php';
+        require 'static/navbar.php';
         ?>
         <div id="layoutSidenav">
             <?php
-            include 'static/sidebar.php';
+            require 'static/sidebar.php';
             ?>  
             <div id="layoutSidenav_content">
                 <main>
@@ -73,7 +73,7 @@ include 'utils/return_login.php';
                     </div>
                 </main>
                 <?php
-                include 'static/footer.php';
+                require 'static/footer.php';
                 ?>
             </div>
         </div>
