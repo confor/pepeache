@@ -6,6 +6,7 @@ include 'return_login.php';
 
 if (strlen($_POST['id_poly']) == 0 || strlen($_POST['nombre']) == 0 || strlen($_POST['descripcion']) == 0 || strlen($_POST['etiquetas']) == 0 ) {
     header('Location: ../lugares.php');
+    exit();
 }
 
 include 'database.php';

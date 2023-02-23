@@ -63,7 +63,7 @@ $_SESSION['lugares'] = select_all($con, $sql);
                                         <?php
                                         if (isset($_SESSION['editando'])) {
                                             echo '
-                                        <form class="row g-3" action="utils/validate_edit_lugar.php" method="post">
+                                        <form class="row g-3" action="utils/validate_edit_lugar.php" method="post" enctype="multipart/form-data">
                                             <input type="number" class="form-control" id="id_lugar" name="id_lugar" value="'.$_GET['a'].'" required hidden>
                                             <div class="col-md-6">
                                                 <label for="id_poly" class="form-label">ID OSM (Open Street Map)</label>
@@ -78,7 +78,7 @@ $_SESSION['lugares'] = select_all($con, $sql);
                                                 <input type="text" class="form-control" id="descripcion" name="descripcion" value="'.$_GET['d'].'" required>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="url" class="form-label">URL foto (opcional)</label>
+                                                <label for="url" class="form-label">URL foto (jpg, jpeg o png) (opcional)</label>
                                                 <input type="text" class="form-control" id="url" name="url_foto" value="'.$_GET['e'].'">
                                             </div>
                                             <div class="col-md-6">
@@ -98,7 +98,7 @@ $_SESSION['lugares'] = select_all($con, $sql);
                                                 <input class="btn btn-secondary" type="submit" value="Editar información">';
                                         } else {
                                             echo '
-                                        <form class="row g-3" action="utils/validate_insert_lugar.php" method="post">
+                                        <form class="row g-3" action="utils/validate_insert_lugar.php" method="post" enctype="multipart/form-data">
                                             <div class="col-md-6">
                                                 <label for="id_poly" class="form-label">ID OSM (Open Street Map)</label>
                                                 <input type="number" class="form-control" id="id_poly" name="id_poly" value="" required>
@@ -110,6 +110,10 @@ $_SESSION['lugares'] = select_all($con, $sql);
                                             <div class="col-md-6">
                                                 <label for="descripcion" class="form-label">Descripción</label>
                                                 <input type="text" class="form-control" id="descripcion" name="descripcion" value="" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="url_foto" class="form-label">Foto (Opcional)</label>
+                                                <input type="file" class="form-control" id="url_foto" name="url_foto" value="">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="horario" class="form-label">Horario (Opcional)</label>

@@ -8,17 +8,21 @@ session_start();
 
 if (strlen($_POST['name']) == 0 || strlen($_POST['rut']) == 0 || strlen($_POST['email']) == 0 || strlen($_POST['new_password']) == 0 || strlen($_POST['rep_new_password']) == 0 || strlen($_POST['password']) == 0) {
     header('Location: ../editar_usuario.php');
+    exit();
 }
 
 if ($_POST['password'] != $_SESSION['pass']) {
     $_SESSION['editMessage'] = 'Contraseña actual incorrecta';
     header('Location: ../editar_usuario.php');
+    exit();
 } elseif ($_POST['new_password'] != $_POST['rep_new_password']) {
     $_SESSION['editMessage'] = 'La nueva contraseña no coincide con la repetición';
     header('Location: ../editar_usuario.php');
+    exit();
 } elseif (rut($_POST['rut']) == false) {
     $_SESSION['editMessage'] = 'RUT no valido';
     header('Location: ../editar_usuario.php');
+    exit();
 } else {
     include 'database.php';
     
@@ -37,4 +41,5 @@ if ($_POST['password'] != $_SESSION['pass']) {
     
     $_SESSION['userMessage'] = 'Usuario editado correctamente';
     header('Location: ../index.php');
+    exit();
 }

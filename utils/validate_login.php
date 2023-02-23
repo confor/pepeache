@@ -4,6 +4,7 @@ session_start();
 
 if (strlen($_POST['email']) == 0 || strlen($_POST['pass']) == 0) {
     header('Location: ../index.php');
+    exit();
 }
 
 include 'database.php';
@@ -30,7 +31,9 @@ if (count($query) > 0) {
 
     $_SESSION['validate'] = 0;
     header('Location: ../index.php');
+    exit();
 } else {
     $_SESSION['validate'] = 1;
     header('Location: ../login.php');
+    exit();
 }
