@@ -54,8 +54,7 @@ $LUGARES = select_all($con, $sql);
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                <?php
-                                if (isset($_SESSION['editando'])) {
+                                <?php if (isset($_SESSION['editando'])) {
                                     echo 'Edición de lugar';
                                 } else {
                                     echo 'Ingresar un lugar';
@@ -67,38 +66,72 @@ $LUGARES = select_all($con, $sql);
                                         if (isset($_SESSION['editando'])) {
                                             echo '
                                         <form class="row g-3" action="utils/validate_edit_lugar.php" method="post" enctype="multipart/form-data">
-                                            <input type="number" class="form-control" id="id_lugar" name="id_lugar" value="'.$_GET['a'].'" required hidden>
+                                            <input type="number" class="form-control" id="id_lugar" name="id_lugar" value="'.$_SESSION['formulario'][0].'" required hidden>
                                             <div class="col-md-6">
                                                 <label for="id_poly" class="form-label">ID OSM (Open Street Map)</label>
-                                                <input type="number" class="form-control" id="id_poly" name="id_poly" value="'.$_GET['b'].'" required>
+                                                <input type="number" class="form-control" id="id_poly" name="id_poly" value="'.$_SESSION['formulario'][1].'" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="nombre" class="form-label">Nombre</label>
-                                                <input type="text" class="form-control" id="nombre" name="nombre" value="'.$_GET['c'].'" required>
+                                                <input type="text" class="form-control" id="nombre" name="nombre" value="'.$_SESSION['formulario'][2].'" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="descripcion" class="form-label">Descripción</label>
-                                                <input type="text" class="form-control" id="descripcion" name="descripcion" value="'.$_GET['d'].'" required>
+                                                <input type="text" class="form-control" id="descripcion" name="descripcion" value="'.$_SESSION['formulario'][3].'" required>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="url" class="form-label">URL foto (jpg, jpeg o png) (opcional)</label>
-                                                <input type="text" class="form-control" id="url" name="url_foto" value="'.$_GET['e'].'">
+                                                <label for="url_foto" class="form-label">Nueva foto (Opcional)</label>
+                                                <input type="file" class="form-control" id="url_foto" name="url_foto" value="">
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="horario" class="form-label">Horario (Opcional)</label>
-                                                <textarea rows="4" cols="20" class="form-control" id="horario" name="horario">'.$_GET['f'].'</textarea>
+                                                <textarea rows="4" cols="20" class="form-control" id="horario" name="horario">'.$_SESSION['formulario'][5].'</textarea>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="etiquetas" class="form-label">Etiquetas</label>
-                                                <input type="text" class="form-control" id="etiquetas" name="etiquetas" value="'.$_GET['h'].'" required>
+                                                <input type="text" class="form-control" id="etiquetas" name="etiquetas" value="'.$_SESSION['formulario'][7].'" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="id_duenho" class="form-label">ID Dueño (opcional)</label>
-                                                <input type="number" class="form-control" id="id_duenho" name="id_duenho" value="'.$_GET['j'].'">
+                                                <input type="number" class="form-control" id="id_duenho" name="id_duenho" value="'.$_SESSION['formulario'][9].'">
                                             </div>
                                             <div class="col-12 text-end">
-                                                <a href="utils/volver_editando.php" class="btn btn-light">Cancelar</a>
+                                                <a href="utils/cancel_lugar.php" class="btn btn-light">Cancelar</a>
                                                 <input class="btn btn-secondary" type="submit" value="Editar información">';
+                                            } elseif (isset($_SESSION['eliminando'])) {
+                                                echo '
+                                            <form class="row g-3" action="utils/eliminar_lugar.php" method="post" enctype="multipart/form-data">
+                                                <div class="col-md-6">
+                                                    <label for="id_lugar" class="form-label">ID Lugar</label>
+                                                    <input type="number" class="form-control" id="id_lugar" name="id_lugar" value="'.$_SESSION['formulario'][0].'" readonly>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="id_poly" class="form-label">ID OSM (Open Street Map)</label>
+                                                    <input type="number" class="form-control" id="id_poly" name="id_poly" value="'.$_SESSION['formulario'][1].'" readonly>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="nombre" class="form-label">Nombre</label>
+                                                    <input type="text" class="form-control" id="nombre" name="nombre" value="'.$_SESSION['formulario'][2].'" readonly>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="descripcion" class="form-label">Descripción</label>
+                                                    <input type="text" class="form-control" id="descripcion" name="descripcion" value="'.$_SESSION['formulario'][3].'" readonly>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="horario" class="form-label">Horario</label>
+                                                    <textarea rows="4" cols="20" class="form-control" id="horario" name="horario" readonly>'.$_SESSION['formulario'][5].'</textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="etiquetas" class="form-label">Etiquetas</label>
+                                                    <input type="text" class="form-control" id="etiquetas" name="etiquetas" value="'.$_SESSION['formulario'][7].'" readonly>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="id_duenho" class="form-label">ID Dueño</label>
+                                                    <input type="number" class="form-control" id="id_duenho" name="id_duenho" value="'.$_SESSION['formulario'][9].'" readonly>
+                                                </div>
+                                                <div class="col-12 text-end">
+                                                    <a href="utils/cancel_lugar.php" class="btn btn-light">Cancelar</a>
+                                                    <input class="btn btn-secondary" type="submit" value="Eliminar lugar">';
                                         } else {
                                             echo '
                                         <form class="row g-3" action="utils/validate_insert_lugar.php" method="post" enctype="multipart/form-data">
@@ -152,7 +185,7 @@ Lunes:Martes:Miércoles:Jueves:Viernes:Sábado:Domingo:</textarea>
                                             <th>ID OSM</th>
                                             <th>Nombre</th>
                                             <th>Descripción</th>
-                                            <th>URL foto</th>
+                                            <th>Foto</th>
                                             <th>Horario</th>
                                             <th>Visitas</th>
                                             <th>Etiquetas</th>
@@ -167,7 +200,7 @@ Lunes:Martes:Miércoles:Jueves:Viernes:Sábado:Domingo:</textarea>
                                             <th>ID OSM</th>
                                             <th>Nombre</th>
                                             <th>Descripción</th>
-                                            <th>URL foto</th>
+                                            <th>Foto</th>
                                             <th>Horario</th>
                                             <th>Visitas</th>
                                             <th>Etiquetas</th>
@@ -178,20 +211,41 @@ Lunes:Martes:Miércoles:Jueves:Viernes:Sábado:Domingo:</textarea>
                                     </tfoot>
                                     <tbody>
                                     <?php
+                                    $lugar_dict = [
+                                        0 => 'id_lugar',
+                                        1 => 'id_poly',
+                                        2 => 'nombre',
+                                        3 => 'descripcion',
+                                        4 => 'url_foto',
+                                        5 => 'horario',
+                                        6 => 'visitas',
+                                        7 => 'etiquetas',
+                                        8 => 'ts_creacion',
+                                        9 => 'id_duenho'
+                                    ];
                                     foreach ($LUGARES as $lugar) {
-                                        echo '<tr>';
-                                        $p = array();
-
-                                        foreach ($lugar as $columna) {
-                                            echo '<td>';
-                                            echo $columna;
-                                            echo '</td>';
-                                            array_push($p, $columna);
+                                        echo '<tr><form action="utils/select_lugar.php" method="post">';
+                                        foreach ($lugar as $key => $columna) {
+                                            if ($key != 4 && $key != 9) {
+                                                echo '<td><input name="'.$lugar_dict[$key].'" value="'.$columna.'" hidden>'.$columna.'</td>';
+                                            } elseif ($key == 9) {
+                                                if ($columna == NULL) {
+                                                    echo '<td><input name="'.$lugar_dict[$key].'" value="" hidden>No tiene</td>';
+                                                } else {
+                                                    echo '<td><input name="'.$lugar_dict[$key].'" value="'.$columna.'" hidden>'.$columna.'</td>';
+                                                }
+                                            } elseif ($key == 4) {
+                                                if ($columna != NULL) {
+                                                    echo '<td><input name="'.$lugar_dict[$key].'" value="'.$columna.'" hidden><img src="'.$columna.'" width="50" height="50"></td>';
+                                                } else {
+                                                    echo '<td><input name="'.$lugar_dict[$key].'" value="" hidden>No tiene foto</td>';
+                                                }
+                                            }
                                         }
-                                        echo '<td>';
-                                        echo '<a href="utils/ir_editando.php?a='.$p[0].'&b='.$p[1].'&c='.$p[2].'&d='.$p[3].'&e='.$p[4].'&f='.$p[5].'&g='.$p[6].'&h='.$p[7].'&i='.$p[8].'&j='.$p[9].'" class="btn btn-secondary">Editar</a>';
-                                        echo '</td>';
-                                        echo '</tr>';
+                                        echo '<td><div class="btn-group" role="group">
+                                                <input class="btn btn-warning" type="submit" name="editar" value="Editar">
+                                                <input class="btn btn-danger" type="submit" name="eliminar" value="Eliminar">
+                                            </div></td></form></tr>';
                                     }
                                     ?>
                                     </tbody>

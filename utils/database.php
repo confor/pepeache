@@ -48,3 +48,9 @@ function insert($con, $sql, $types, $params) {
     $stmt->bind_param($types, ...$params);
     $stmt->execute();
 }
+
+function delete($con, $sql, $type, $id) {
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param($type, $id);
+    $stmt->execute();
+}

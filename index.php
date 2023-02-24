@@ -33,7 +33,6 @@ require 'utils/return_login.php';
                                     </div>
                                 </div>
                             </div>
-
                         <?php
                         $_SESSION['userMessage'] = '';
                         }

@@ -31,7 +31,7 @@ require_once 'utils/common.php';
                             <div class="row">
                                 <div class="col-xl-3">
                                     <div class="card text-white mb-4 bg-opacity-50 bg-danger">
-                                        <div class="card-body">'<?= out($_SESSION['editMessage']) ?></div>
+                                        <div class="card-body"><?= out($_SESSION['editMessage']) ?></div>
                                     </div>
                                 </div>
                             </div>
