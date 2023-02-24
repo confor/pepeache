@@ -14,7 +14,7 @@ $con = connect();
 $email = $_POST['email'];
 $pass = $_POST['pass'];
 
-$sql = 'SELECT * FROM usuario WHERE correo = ? AND password= ?';
+$sql = 'SELECT * FROM usuario WHERE correo = ? AND password= ?'; # no
 $params = [$email, $pass];
 
 $query = select($con, $sql, $params);
@@ -24,7 +24,7 @@ if (count($query) > 0) {
     $_SESSION['id'] = $query[0][0];
     $_SESSION['name'] = $query[0][1];
     $_SESSION['email'] = $query[0][2];
-    $_SESSION['pass'] = $query[0][3];
+    $_SESSION['pass'] = $query[0][3]; # NO
     $_SESSION['rut'] = $query[0][4];
     $_SESSION['admin'] = $query[0][5];
     $_SESSION['ts'] = $query[0][6];

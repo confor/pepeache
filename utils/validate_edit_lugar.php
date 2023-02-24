@@ -2,9 +2,11 @@
 
 require 'return_login.php';
 
-if (strlen($_POST['id_poly']) == 0 || strlen($_POST['nombre']) == 0 || strlen($_POST['descripcion']) == 0 || strlen($_POST['etiquetas']) == 0 ) {
-    header('Location: ../lugares.php');
-    exit();
+foreach ($required in ['id_poly', 'nombre', 'descripcion', 'etiquetas']) {
+    if (array_key_exists($required, $_POST) !== true || strlen($_POST[$required]) === 0) {
+        header('Location: ../lugares.php');
+        exit();
+    }
 }
 
 require 'database.php';
@@ -18,9 +20,9 @@ $types = '';
 foreach ($_POST as $key => $valor) {
     if ($key != 'id_lugar') {
         if ($key != 'id_duenho') {
-            $sql = $sql.' '.$key.'=?,';
+            $sql = $sql.' '.$key.'=?,'; # ??
         } else {
-            $sql = $sql.' '.$key.'=?';
+            $sql = $sql.' '.$key.'=?'; # ??
         }
         array_push($params, $valor);
         if ($key == 'id_lugar' || $key == 'id_duenho' || $key == 'id_poly') {
@@ -34,7 +36,8 @@ $sql = $sql.' WHERE id_lugar=?';
 array_push($params, $_POST['id_lugar']);
 $types = $types.'i';
 
-edit($con, $sql, $types, $params);
+# probablemente vulnerable
+edit($con, $sql, $types, $params); # TODO validar
 
 $_SESSION['lugarMessage'] = 'Lugar editado correctamente';
 $_SESSION['lugarStatus'] = 'success';

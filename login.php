@@ -40,12 +40,12 @@ if ($_SESSION['validate'] == NULL) {
                                                 <input class="form-control" name="pass" type="password" required/>
                                                 <label for="inputPassword">Contraseña</label>
                                             </div>
+                                            <?php if ($_SESSION['validate'] == 1) { ?>
+                                                <div class="alert alert-danger d-flex align-items-center justify-content-start mt-4 mb-0" role="alert">
+                                                    Credenciales incorrectas!
+                                                </div>
                                             <?php
-                                            if ($_SESSION['validate'] == 1) {
-                                                echo '<div class="alert alert-danger d-flex align-items-center justify-content-start mt-4 mb-0" role="alert">
-                                                        Credenciales incorrectas!
-                                                    </div>';
-                                                $_SESSION['validate'] = 0;
+                                            $_SESSION['validate'] = 0;
                                             }
                                             ?>
                                             <div class="d-flex align-items-center justify-content-end mt-4 mb-0">

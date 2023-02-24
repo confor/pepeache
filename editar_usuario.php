@@ -1,5 +1,6 @@
 <?php
 require 'utils/return_login.php';
+require_once 'utils/common.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +18,7 @@ require 'utils/return_login.php';
         <div id="layoutSidenav">
             <?php
             require 'static/sidebar.php';
-            ?>  
+            ?>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
@@ -26,15 +27,16 @@ require 'utils/return_login.php';
                             <li class="breadcrumb-item active">Tu cuenta</li>
                         </ol>
                         <?php
-                        if (strlen($_SESSION['editMessage']) > 0) {
-                            echo '<div class="row">
-                                    <div class="col-xl-3">
-                                        <div class="card text-white mb-4 bg-opacity-50 bg-danger"> 
-                                            <div class="card-body">'.$_SESSION['editMessage'].'</div>
-                                        </div>
+                        if (strlen($_SESSION['editMessage']) > 0) { ?>
+                            <div class="row">
+                                <div class="col-xl-3">
+                                    <div class="card text-white mb-4 bg-opacity-50 bg-danger">
+                                        <div class="card-body">'<?= out($_SESSION['editMessage']) ?></div>
                                     </div>
-                                </div>';
-                            $_SESSION['editMessage'] = '';
+                                </div>
+                            </div>
+                        <?php
+                        $_SESSION['editMessage'] = '';
                         }
                         ?>
                         <div class="card mb-4">
@@ -47,15 +49,15 @@ require 'utils/return_login.php';
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="name" class="form-label">Nuevo nombre</label>
-                                            <input type="text" class="form-control" id="name" name="name" value="<?php echo $_SESSION['name'] ?>" required>
+                                            <input type="text" class="form-control" id="name" name="name" value="<?= out($_SESSION['name']) ?>" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="rut" class="form-label">Nuevo RUT (solo números, utilizar 0 en lugar de k)</label>
-                                            <input type="text" class="form-control" id="rut" name="rut" value="<?php echo $_SESSION['rut'] ?>" pattern="\d+" required>
+                                            <input type="text" class="form-control" id="rut" name="rut" value="<?= out($_SESSION['rut']) ?>" pattern="\d+" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="email" class="form-label">Nuevo correo electrónico</label>
-                                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $_SESSION['email'] ?>" required>
+                                            <input type="email" class="form-control" id="email" name="email" value="<?= out($_SESSION['email']) ?>" required>
                                         </div>
                                     </div>
                                     <div class="row g-3">
@@ -76,7 +78,7 @@ require 'utils/return_login.php';
                                             <input type="password" class="form-control" id="password" name="password" required>
                                         </div>
                                         <div class="col-md-12 text-end">
-                                            <button class="btn btn-light" onclick="window.location.href='index.php'">Cancelar</button>
+                                            <button class="btn btn-light" onclick="window.location.href='index.php'">Cancelar</button> <!-- no -->
                                             <input class="btn btn-secondary" type="submit" value="Editar">
                                         </div>
                                     </div>
