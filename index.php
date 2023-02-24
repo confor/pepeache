@@ -62,7 +62,7 @@ require 'utils/return_login.php';
                                     </div>
                                     <div class="col-md-6">
                                         <label for="place" class="form-label">Lugar asociado</label>
-                                        <input type="text" class="form-control" id="place" name="place" value="<?= out('*nombre de tu lugar*') ?>" readonly>
+                                        <input type="text" class="form-control" id="place" name="place" value="<?= out($_SESSION['lugar']) ?>" readonly>
                                     </div>
                                     <div class="col-12 text-end">
                                         <a href="editar_usuario.php" class="btn btn-secondary">Editar información</a>
