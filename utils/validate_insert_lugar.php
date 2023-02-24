@@ -11,6 +11,7 @@ if (strlen($_FILES['url_foto']['name']) > 0) {
     $file = $_FILES['url_foto']['name'];
     $temp_name = $_FILES['url_foto']['tmp_name'];
 
+    # FIXME hay que usar magic bytes, esto no sirve para validar
     $ext = pathinfo($file, PATHINFO_EXTENSION);
 
     $allow_ext = array('jpg', 'jpeg', 'png');
@@ -19,8 +20,11 @@ if (strlen($_FILES['url_foto']['name']) > 0) {
         // $folder = 'img/';
         // $path = $_POST['nombre'];
 
+        # FIXME hay q permitir configurar la ruta raíz del sistema
+        # quizá hacer un define('ROOT', '/var/www/html') ?
         move_uploaded_file($temp_name, '/var/www/html/img/a.png');
     } else {
+        # la extensión no dice que tipo de archivo es, eso es algo de windows
         echo 'extension INCORRECTA';
         $_SESSION['lugarMessage'] = 'Extensión de imagen no desponible (usar solo jpg, jpeg o png)';
         $_SESSION['lugarStatus'] = 'danger';
@@ -44,7 +48,7 @@ if (strlen($_POST['id_duenho']) == 0) {
     $types = 'issssi';
 }
 
-insert($con, $sql, $types, $params);
+insert($con, $sql, $types, $params); # TODO validar
 
 $_SESSION['lugarMessage'] = 'Usuario insertado correctamente';
 $_SESSION['lugarStatus'] = 'success';

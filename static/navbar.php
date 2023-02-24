@@ -1,5 +1,5 @@
 <?php
-include '../utils/return_login.php';
+include '../utils/return_login.php'; # ??
 ?>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
@@ -15,8 +15,8 @@ include '../utils/return_login.php';
     </button>
     <!-- Navbar-->
     <div class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
-        <form action="utils/logout.php" method="post">    
+        <form action="utils/logout.php" method="post">
             <input class="btn btn-secondary" type="submit" value="Cerrar sesión">
-        </form>    
+        </form>
     </div>
 </nav>

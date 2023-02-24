@@ -1,13 +1,16 @@
 <?php
-require 'utils/return_login.php';
 
+# yo al ver este archivo
+# https://thumbs.dreamstime.com/z/depressed-emoticon-sad-hands-face-56094937.jpg
+
+require 'utils/return_login.php';
 require 'utils/database.php';
 
 $con = connect();
 
 $sql = 'SELECT * FROM lugar';
 
-$_SESSION['lugares'] = select_all($con, $sql);
+$LUGARES = select_all($con, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +29,7 @@ $_SESSION['lugares'] = select_all($con, $sql);
         <div id="layoutSidenav">
             <?php
             require 'static/sidebar.php';
-            ?>  
+            ?>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
@@ -39,7 +42,7 @@ $_SESSION['lugares'] = select_all($con, $sql);
                         if (strlen($_SESSION['lugarMessage']) > 0) {
                             echo '<div class="row">
                                     <div class="col-xl-3">
-                                        <div class="card text-white mb-4 bg-opacity-50 bg-'.$_SESSION['lugarStatus'].'"> 
+                                        <div class="card text-white mb-4 bg-opacity-50 bg-'.$_SESSION['lugarStatus'].'">
                                             <div class="card-body">'.$_SESSION['lugarMessage'].'</div>
                                         </div>
                                     </div>
@@ -57,7 +60,7 @@ $_SESSION['lugares'] = select_all($con, $sql);
                                 } else {
                                     echo 'Ingresar un lugar';
                                 }
-                                ?> 
+                                ?>
                             </div>
                             <div class="card-body">
                                         <?php
@@ -131,7 +134,7 @@ Lunes:Martes:Miércoles:Jueves:Viernes:Sábado:Domingo:</textarea>
                                             <div class="col-12 text-end">
                                                 <input class="btn btn-secondary" type="submit" value="Ingresar">';
                                         }
-                                        ?>    
+                                        ?>
                                     </div>
                                 </form>
                             </div>
@@ -175,7 +178,7 @@ Lunes:Martes:Miércoles:Jueves:Viernes:Sábado:Domingo:</textarea>
                                     </tfoot>
                                     <tbody>
                                     <?php
-                                    foreach ($_SESSION['lugares'] as $lugar) {
+                                    foreach ($LUGARES as $lugar) {
                                         echo '<tr>';
                                         $p = array();
 
