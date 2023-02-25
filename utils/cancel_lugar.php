@@ -1,6 +1,7 @@
 <?php
 
 define('ROOT', '/var/www/html');
+
 require ROOT . '/utils/return_login.php';
 
 if (isset($_SESSION['eliminando'])) {

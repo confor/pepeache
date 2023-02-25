@@ -96,7 +96,7 @@ if ($query === false) {
                     </div>
                 </main>
                 <?php
-                require ROOT . '/static/footer.php';
+                include ROOT . '/static/footer.html';
                 ?>
             </div>
         </div>

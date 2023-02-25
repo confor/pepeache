@@ -1,6 +1,5 @@
 <?php
-# yo al ver este archivo
-# https://thumbs.dreamstime.com/z/depressed-emoticon-sad-hands-face-56094937.jpg
+
 define('ROOT', '/var/www/html');
 
 require ROOT . '/utils/return_login.php';
@@ -244,7 +243,7 @@ Lunes:Martes:Miércoles:Jueves:Viernes:Sábado:Domingo:</textarea>
                     </div>
                 </main>
                 <?php
-                include ROOT . '/static/footer.php';
+                include ROOT . '/static/footer.html';
                 ?>
             </div>
         </div>
