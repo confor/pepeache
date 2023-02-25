@@ -12,7 +12,7 @@ require_once 'utils/common.php';
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body class="sb-nav-fixed">
-        <?
+        <?php
         require 'static/navbar.php';
         ?>
         <div id="layoutSidenav">
@@ -88,7 +88,7 @@ require_once 'utils/common.php';
                     </div>
                 </main>
                 <?php
-                require 'static/footer.php';
+                include 'static/footer.html';
                 ?>
             </div>
         </div>

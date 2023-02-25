@@ -1,5 +1,5 @@
 <?php
-include '../utils/return_login.php'; # ??
+include 'utils/return_login.php';
 require_once 'utils/common.php';
 ?>
 <div id="layoutSidenav_nav">

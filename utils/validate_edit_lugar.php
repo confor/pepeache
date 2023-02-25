@@ -53,9 +53,11 @@ foreach ($_POST as $key => $valor) {
         }
         if ($key == 'descripcion') {
             array_push($params, $valor);
-            array_push($params, $path_sql);
-            $sql = $sql.' url_foto=?,';
-            $types = $types.'s';
+            if ($path_sql != '') {
+                array_push($params, $path_sql);
+                $sql = $sql.' url_foto=?,';
+                $types = $types.'s';
+            }
         } else {
             array_push($params, $valor);
         }
@@ -71,11 +73,19 @@ $sql = $sql.' WHERE id_lugar=?';
 array_push($params, $_POST['id_lugar']);
 $types = $types.'i';
 
-edit($con, $sql, $types, $params);
+$query = edit($con, $sql, $types, $params);
 
-$_SESSION['lugarMessage'] = 'Lugar editado correctamente';
-$_SESSION['lugarStatus'] = 'success';
+if ($query === false) {
+    $_SESSION['lugarMessage'] = 'Error en la base de datos';
+    $_SESSION['lugarStatus'] = 'success';
+    header('Location: ../lugares.php');
+    exit();
+} else {
+    $_SESSION['lugarMessage'] = 'Lugar editado correctamente';
+    $_SESSION['lugarStatus'] = 'success';
 
-unset($_SESSION['editando']);
+    unset($_SESSION['editando']);
 
-header('Location: ../lugares.php');
+    header('Location: ../lugares.php');
+    exit();
+}

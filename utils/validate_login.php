@@ -16,29 +16,27 @@ $pass = $_POST['pass'];
 
 $sql = 'SELECT * FROM usuario WHERE correo = ?';
 $params = [$email];
+$types = 's';
 
-$query = select($con, $sql, $params);
+$query = select($con, $sql, $types, $params);
 
-if (count($query) > 0) {
-    $pass_valid = password_verify($pass, $query[0][3]);
+if ($query === false) {
+    $_SESSION['validate'] = 2;
+    header('Location: ../login.php');
+    exit();
+} elseif (count($query) > 0) {
+    $pass_valid = password_verify($pass, $query[0]['password']);
+    echo var_dump($query[0]);
+    
     if ($pass_valid) {
         $_SESSION['session'] = true;
-        $_SESSION['id'] = $query[0][0];
-        $_SESSION['name'] = $query[0][1];
-        $_SESSION['email'] = $query[0][2];
-        $_SESSION['pass'] = $query[0][3];
-        $_SESSION['rut'] = $query[0][4];
-        $_SESSION['admin'] = $query[0][5];
-        $_SESSION['ts'] = $query[0][6];
-
-        $sql = 'SELECT * FROM lugar WHERE id_duenho = ?';
-        $params = [$_SESSION['id']];
-        $query_2 = select($con, $sql, $params);
-        if (count($query_2) > 0) {
-            $_SESSION['lugar'] = [$query_2[0]];
-        } else {
-            $_SESSION['lugar'] = 'No tiene lugar asignado';
-        }
+        $_SESSION['id'] = $query[0]['id_usuario'];
+        $_SESSION['name'] = $query[ 0]['nombre'];
+        $_SESSION['email'] = $query[0]['correo'];
+        $_SESSION['pass'] = $query[0]['password'];
+        $_SESSION['rut'] = $query[0]['rut'];
+        $_SESSION['admin'] = $query[0]['admin'];
+        $_SESSION['ts'] = $query[0]['ts_creacion'];
 
         $_SESSION['validate'] = 0;
         header('Location: ../index.php');

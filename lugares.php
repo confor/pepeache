@@ -1,8 +1,5 @@
 <?php
 
-# yo al ver este archivo
-# https://thumbs.dreamstime.com/z/depressed-emoticon-sad-hands-face-56094937.jpg
-
 require 'utils/return_login.php';
 require 'utils/database.php';
 
@@ -38,17 +35,18 @@ $LUGARES = select_all($con, $sql);
                             <li class="breadcrumb-item active">Lugares</li>
                         </ol>
                         <?php
-
-                        if (strlen($_SESSION['lugarMessage']) > 0) {
-                            echo '<div class="row">
-                                    <div class="col-xl-3">
-                                        <div class="card text-white mb-4 bg-opacity-50 bg-'.$_SESSION['lugarStatus'].'">
-                                            <div class="card-body">'.$_SESSION['lugarMessage'].'</div>
+                        if (isset($_SESSION['lugarMessage'])) {
+                            if (strlen($_SESSION['lugarMessage']) > 0) {
+                                echo '<div class="row">
+                                        <div class="col-xl-3">
+                                            <div class="card text-white mb-4 bg-opacity-50 bg-'.$_SESSION['lugarStatus'].'">
+                                                <div class="card-body">'.$_SESSION['lugarMessage'].'</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>';
-                            $_SESSION['lugarMessage'] = '';
-                            $_SESSION['lugarStatus'] = '';
+                                    </div>';
+                                $_SESSION['lugarMessage'] = '';
+                                $_SESSION['lugarStatus'] = '';
+                            }
                         }
                         ?>
                         <div class="card mb-4">
@@ -211,34 +209,22 @@ Lunes:Martes:Miércoles:Jueves:Viernes:Sábado:Domingo:</textarea>
                                     </tfoot>
                                     <tbody>
                                     <?php
-                                    $lugar_dict = [
-                                        0 => 'id_lugar',
-                                        1 => 'id_poly',
-                                        2 => 'nombre',
-                                        3 => 'descripcion',
-                                        4 => 'url_foto',
-                                        5 => 'horario',
-                                        6 => 'visitas',
-                                        7 => 'etiquetas',
-                                        8 => 'ts_creacion',
-                                        9 => 'id_duenho'
-                                    ];
                                     foreach ($LUGARES as $lugar) {
                                         echo '<tr><form action="utils/select_lugar.php" method="post">';
                                         foreach ($lugar as $key => $columna) {
-                                            if ($key != 4 && $key != 9) {
-                                                echo '<td><input name="'.$lugar_dict[$key].'" value="'.$columna.'" hidden>'.$columna.'</td>';
-                                            } elseif ($key == 9) {
+                                            if ($key != 'url_foto' && $key != 'id_duenho') {
+                                                echo '<td><input name="'.$key.'" value="'.$columna.'" hidden>'.$columna.'</td>';
+                                            } elseif ($key == 'id_duenho') {
                                                 if ($columna == NULL) {
-                                                    echo '<td><input name="'.$lugar_dict[$key].'" value="" hidden>No tiene</td>';
+                                                    echo '<td><input name="'.$key.'" value="" hidden>No tiene</td>';
                                                 } else {
-                                                    echo '<td><input name="'.$lugar_dict[$key].'" value="'.$columna.'" hidden>'.$columna.'</td>';
+                                                    echo '<td><input name="'.$key.'" value="'.$columna.'" hidden>'.$columna.'</td>';
                                                 }
-                                            } elseif ($key == 4) {
+                                            } elseif ($key == 'url_foto') {
                                                 if ($columna != NULL) {
-                                                    echo '<td><input name="'.$lugar_dict[$key].'" value="'.$columna.'" hidden><img src="'.$columna.'" width="50" height="50"></td>';
+                                                    echo '<td><input name="'.$key.'" value="'.$columna.'" hidden><img src="'.$columna.'" width="50" height="50"></td>';
                                                 } else {
-                                                    echo '<td><input name="'.$lugar_dict[$key].'" value="" hidden>No tiene foto</td>';
+                                                    echo '<td><input name="'.$key.'" value="" hidden>No tiene foto</td>';
                                                 }
                                             }
                                         }
@@ -255,7 +241,7 @@ Lunes:Martes:Miércoles:Jueves:Viernes:Sábado:Domingo:</textarea>
                     </div>
                 </main>
                 <?php
-                include 'static/footer.php';
+                include 'static/footer.html';
                 ?>
             </div>
         </div>

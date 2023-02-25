@@ -1,9 +1,7 @@
 <?php
 
 require 'return_login.php';
-
 require 'validate_rut.php';
-
 
 foreach (['name', 'rut', 'email', 'new_password', 'rep_new_password', 'password'] as $required) {
     if (array_key_exists($required, $_POST) !== true || strlen($_POST[$required]) === 0) {
@@ -35,14 +33,20 @@ if (!password_verify($_POST['password'], $_SESSION['pass'])) {
     $params = array($_POST['name'], $_POST['email'], $hash_pass, $_POST['rut'], $_SESSION['id']);
     $types = 'ssssi';
 
-    edit($con, $sql, $types, $params); # TODO validar
+    $query = edit($con, $sql, $types, $params);
 
-    $_SESSION['name'] = $_POST['name'];
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['pass'] = $hash_pass;
-    $_SESSION['rut'] = $_POST['rut'];
+    if ($query === false) {
+        $_SESSION['editMessage'] = 'Error en la base de datos';
+        header('Location: ../editar_usuario.php');
+        exit();
+    } else {
+        $_SESSION['name'] = $_POST['name'];
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['pass'] = $hash_pass;
+        $_SESSION['rut'] = $_POST['rut'];
 
-    $_SESSION['userMessage'] = 'Usuario editado correctamente';
-    header('Location: ../index.php');
-    exit();
+        $_SESSION['userMessage'] = 'Usuario editado correctamente';
+        header('Location: ../index.php');
+        exit();
+    }
 }

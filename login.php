@@ -1,13 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 session_start();
 
-if ($_SESSION['session'] == true) {
+if (isset($_SESSION['session'])) {
     header('Location: index.php');
-}
-
-if ($_SESSION['validate'] == NULL) {
-    $_SESSION['validate'] = 0;
 }
 ?>
 <!DOCTYPE html>
@@ -40,14 +39,16 @@ if ($_SESSION['validate'] == NULL) {
                                                 <input class="form-control" name="pass" type="password" required/>
                                                 <label for="inputPassword">Contraseña</label>
                                             </div>
-                                            <?php if ($_SESSION['validate'] == 1) { ?>
-                                                <div class="alert alert-danger d-flex align-items-center justify-content-start mt-4 mb-0" role="alert">
-                                                    Credenciales incorrectas!
-                                                </div>
-                                            <?php
-                                            $_SESSION['validate'] = 0;
-                                            }
-                                            ?>
+                                            <?php if (isset($_SESSION['validate'])) {
+                                                if ($_SESSION['validate'] == 1) { ?>
+                                                    <div class="alert alert-danger d-flex align-items-center justify-content-start mt-4 mb-0" role="alert">
+                                                        Credenciales incorrectas!
+                                                    </div>
+                                            <?php $_SESSION['validate'] = 0; } elseif ($_SESSION['validate'] == 1) { ?>
+                                                    <div class="alert alert-danger d-flex align-items-center justify-content-start mt-4 mb-0" role="alert">
+                                                        Error en la base de datos
+                                                    </div>
+                                            <?php $_SESSION['validate'] = 0;}}?>
                                             <div class="d-flex align-items-center justify-content-end mt-4 mb-0">
                                                 <input class="btn btn-secondary" type="submit" value="Iniciar sesión">
                                             </div>
@@ -60,7 +61,7 @@ if ($_SESSION['validate'] == NULL) {
                 </main>
             </div>
             <?php
-            require 'static/footer.php';
+            include 'static/footer.html';
             ?>
         </div>
     </body>

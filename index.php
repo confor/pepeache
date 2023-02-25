@@ -1,6 +1,29 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require 'utils/return_login.php';
+require 'utils/database.php';
 require_once 'utils/common.php';
+
+$con = connect();
+
+$sql = 'SELECT * FROM lugar WHERE id_duenho = ?';
+$params = [$_SESSION['id']];
+$query = select($con, $sql, 'i', $params);
+
+if ($query === false) {
+    $_SESSION['validate'] = 2;
+    header('Location: ../index.php');
+    exit();
+} else {
+    if (count($query) > 0) {
+        $_SESSION['lugarAll'] = $query[0];
+        $_SESSION['lugarName'] = $_SESSION['lugarAll']['nombre'];
+    } else {
+        $_SESSION['lugarName'] = 'No tiene lugar asociado';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +49,7 @@ require_once 'utils/common.php';
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Tu cuenta</li>
                         </ol>
-                        <?php if (strlen($_SESSION['userMessage']) > 0) { ?>
+                        <?php if (isset($_SESSION['userMessage'])) { ?>
                             <div class="row">
                                 <div class="col-xl-3">
                                     <div class="card text-white mb-4 bg-opacity-50 bg-success">
@@ -35,7 +58,7 @@ require_once 'utils/common.php';
                                 </div>
                             </div>
                         <?php
-                        $_SESSION['userMessage'] = '';
+                        unset($_SESSION['userMessage']);
                         }
                         ?>
                         <div class="card mb-4">
@@ -59,7 +82,7 @@ require_once 'utils/common.php';
                                     </div>
                                     <div class="col-md-6">
                                         <label for="place" class="form-label">Lugar asociado</label>
-                                        <input type="text" class="form-control" id="place" name="place" value="<?= out($_SESSION['lugar']) ?>" readonly>
+                                        <input type="text" class="form-control" id="place" name="place" value="<?= out($_SESSION['lugarName']) ?>" readonly>
                                     </div>
                                     <div class="col-12 text-end">
                                         <a href="editar_usuario.php" class="btn btn-secondary">Editar información</a>
@@ -70,7 +93,7 @@ require_once 'utils/common.php';
                     </div>
                 </main>
                 <?php
-                require 'static/footer.php';
+                include 'static/footer.html';
                 ?>
             </div>
         </div>

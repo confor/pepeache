@@ -15,43 +15,56 @@ function connect() {
     return "Connection Failed";
 }
 
-function select($con, $sql, $params) {
-    $result = array();
-    $query = $con->execute_query($sql, $params);
+function select($con, $sql, $types, $params) {
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param($types, ...$params);
+    $result = $stmt->execute();
 
-    while ($row = $query->fetch_row()) {
-        array_push($result, $row);
+    if ($result === false) {
+        return false;
+    } else {
+        $output = array();
+        $result = $stmt->get_result();
+        while ($fila = $result->fetch_assoc()) {
+            array_push($output, $fila);
+        }
+        return $output;
     }
-
-    return $result;
 }
 
 function select_all($con, $sql) {
-    $result = array();
-    $query = $con->execute_query($sql);
+    $stmt = $con->prepare($sql);
+    $result = $stmt->execute();
 
-    while ($row = $query->fetch_row()) {
-        array_push($result, $row);
+    if ($result === false) {
+        return false;
+    } else {
+        $output = array();
+        $result = $stmt->get_result();
+        while ($fila = $result->fetch_assoc()) {
+            array_push($output, $fila);
+        }
+        return $output;
     }
-
-    return $result;
 }
 
 function edit($con, $sql, $types, $params) {
     $stmt = $con->prepare($sql);
     $stmt->bind_param($types, ...$params);
-    $stmt->execute();
     
+    return $stmt->execute();
 }
 
 function insert($con, $sql, $types, $params) {
     $stmt = $con->prepare($sql);
     $stmt->bind_param($types, ...$params);
-    $stmt->execute();
+    
+    return $stmt->execute();
 }
 
 function delete($con, $sql, $type, $id) {
     $stmt = $con->prepare($sql);
     $stmt->bind_param($type, $id);
-    $stmt->execute();
+    
+    return $stmt->execute();
 }
