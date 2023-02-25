@@ -2,9 +2,12 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require 'utils/return_login.php';
-require 'utils/database.php';
-require_once 'utils/common.php';
+
+define('ROOT', '/var/www/html');
+
+require ROOT . '/utils/return_login.php';
+require_once ROOT . '/utils/common.php';
+require ROOT . '/utils/database.php';
 
 $con = connect();
 
@@ -36,11 +39,11 @@ if ($query === false) {
     </head>
     <body class="sb-nav-fixed">
         <?php
-        require 'static/navbar.php';
+        require ROOT . '/static/navbar.php';
         ?>
         <div id="layoutSidenav">
             <?php
-            require 'static/sidebar.php';
+            require ROOT . '/static/sidebar.php';
             ?>
             <div id="layoutSidenav_content">
                 <main>
@@ -49,7 +52,7 @@ if ($query === false) {
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Tu cuenta</li>
                         </ol>
-                        <?php if (isset($_SESSION['userMessage'])) { ?>
+                        <?php if (isset($_SESSION['userMessage']) && strlen($_SESSION['userMessage']) > 0) { ?>
                             <div class="row">
                                 <div class="col-xl-3">
                                     <div class="card text-white mb-4 bg-opacity-50 bg-success">
@@ -93,7 +96,7 @@ if ($query === false) {
                     </div>
                 </main>
                 <?php
-                include 'static/footer.html';
+                require ROOT . '/static/footer.php';
                 ?>
             </div>
         </div>

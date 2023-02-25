@@ -1,7 +1,9 @@
 <?php
 
-require 'return_login.php';
-require 'validate_rut.php';
+define('ROOT', '/var/www/html');
+
+require ROOT . '/utils/return_login.php';
+require ROOT . '/utils/validate_rut.php';
 
 foreach (['name', 'rut', 'email', 'new_password', 'rep_new_password', 'password'] as $required) {
     if (array_key_exists($required, $_POST) !== true || strlen($_POST[$required]) === 0) {
@@ -23,12 +25,12 @@ if (!password_verify($_POST['password'], $_SESSION['pass'])) {
     header('Location: ../editar_usuario.php');
     exit();
 } else {
-    require 'database.php';
+    require ROOT . '/utils/database.php';
 
     $con = connect();
 
     $hash_pass = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
-    
+
     $sql = 'UPDATE usuario SET nombre=?, correo=?, password=?, rut=? WHERE id_usuario=?';
     $params = array($_POST['name'], $_POST['email'], $hash_pass, $_POST['rut'], $_SESSION['id']);
     $types = 'ssssi';

@@ -3,6 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+define('ROOT', '/var/www/html');
+
 session_start();
 
 if (isset($_SESSION['session'])) {
@@ -61,7 +63,7 @@ if (isset($_SESSION['session'])) {
                 </main>
             </div>
             <?php
-            include 'static/footer.html';
+            include ROOT . '/static/footer.php';
             ?>
         </div>
     </body>

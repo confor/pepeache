@@ -1,6 +1,6 @@
 <?php
-include 'utils/return_login.php';
-require_once 'utils/common.php';
+include ROOT . '/utils/return_login.php';
+require_once ROOT . '/utils/common.php';
 ?>
 <div id="layoutSidenav_nav">
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">

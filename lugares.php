@@ -1,7 +1,10 @@
 <?php
+# yo al ver este archivo
+# https://thumbs.dreamstime.com/z/depressed-emoticon-sad-hands-face-56094937.jpg
+define('ROOT', '/var/www/html');
 
-require 'utils/return_login.php';
-require 'utils/database.php';
+require ROOT . '/utils/return_login.php';
+require ROOT . '/utils/database.php';
 
 $con = connect();
 
@@ -21,11 +24,11 @@ $LUGARES = select_all($con, $sql);
     </head>
     <body class="sb-nav-fixed">
         <?php
-        require 'static/navbar.php';
+        require ROOT . '/static/navbar.php';
         ?>
         <div id="layoutSidenav">
             <?php
-            require 'static/sidebar.php';
+            require ROOT . '/static/sidebar.php';
             ?>
             <div id="layoutSidenav_content">
                 <main>
@@ -241,7 +244,7 @@ Lunes:Martes:Miércoles:Jueves:Viernes:Sábado:Domingo:</textarea>
                     </div>
                 </main>
                 <?php
-                include 'static/footer.html';
+                include ROOT . '/static/footer.php';
                 ?>
             </div>
         </div>
