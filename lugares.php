@@ -2,7 +2,7 @@
 
 # yo al ver este archivo
 # https://thumbs.dreamstime.com/z/depressed-emoticon-sad-hands-face-56094937.jpg
-define('ROOT', '/var/www/html2/pepeache-patch-2');
+define('ROOT', '/var/www/html');
 require ROOT . '/utils/return_login.php';
 require ROOT . '/utils/database.php';
 

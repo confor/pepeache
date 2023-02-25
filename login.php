@@ -1,6 +1,6 @@
 <?php
 
-define('ROOT', '/var/www/html2/pepeache-patch-2');
+define('ROOT', '/var/www/html');
 
 session_start();
 

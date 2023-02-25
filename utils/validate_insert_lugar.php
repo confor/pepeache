@@ -1,6 +1,6 @@
 <?php
 
-define('ROOT', '/var/www/html2/pepeache-patch-2');
+define('ROOT', '/var/www/html');
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

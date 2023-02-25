@@ -1,6 +1,6 @@
 <?php
 
-define('ROOT', '/var/www/html2/pepeache-patch-2');
+define('ROOT', '/var/www/html');
 require ROOT . '/utils/return_login.php';
 
 foreach (['id_lugar', 'id_poly', 'nombre', 'descripcion', 'etiquetas'] as $required) {
