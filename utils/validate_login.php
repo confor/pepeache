@@ -1,4 +1,5 @@
 <?php
+define('ROOT', '/var/www/html');
 
 session_start();
 
