@@ -1,7 +1,10 @@
 <?php
+
+define('ROOT', '/var/www/html2/pepeache-patch-2');
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(E_ALL); # necesitamos esto?
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -14,7 +17,7 @@ foreach (['id_poly', 'nombre', 'descripcion', 'etiquetas'] as $required) {
     }
 }
 
-require 'database.php';
+require ROOT . '/utils/database.php';
 
 $con = connect();
 
@@ -48,7 +51,7 @@ if (strlen($_FILES['url_foto']['name']) > 0) {
 
         # FIXME hay q permitir configurar la ruta raíz del sistema
         # quizá hacer un define('ROOT', '/var/www/html') ?
-        move_uploaded_file($temp_name, $path); 
+        move_uploaded_file($temp_name, $path);
     } else {
         $_SESSION['lugarMessage'] = 'Extensión de imagen no desponible (usar solo jpg, jpeg o png)';
         $_SESSION['lugarStatus'] = 'danger';

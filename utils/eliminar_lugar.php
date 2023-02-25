@@ -1,6 +1,7 @@
 <?php
 
-require 'return_login.php';
+define('ROOT', '/var/www/html2/pepeache-patch-2');
+require ROOT . '/utils/return_login.php';
 
 foreach (['id_lugar', 'id_poly', 'nombre', 'descripcion', 'etiquetas'] as $required) {
     if (array_key_exists($required, $_POST) !== true || strlen($_POST[$required]) === 0) {
@@ -9,7 +10,7 @@ foreach (['id_lugar', 'id_poly', 'nombre', 'descripcion', 'etiquetas'] as $requi
     }
 }
 
-require 'database.php';
+require ROOT . '/utils/database.php';
 
 $con = connect();
 

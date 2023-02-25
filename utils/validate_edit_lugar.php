@@ -1,6 +1,7 @@
 <?php
 
-require 'return_login.php';
+define('ROOT', '/var/www/html2/pepeache-patch-2');
+require ROOT . '/utils/return_login.php';
 
 foreach (['id_lugar', 'id_poly', 'nombre', 'descripcion', 'etiquetas'] as $required) {
     if (array_key_exists($required, $_POST) !== true || strlen($_POST[$required]) === 0) {
@@ -26,7 +27,7 @@ if (strlen($_FILES['url_foto']['name']) > 0) {
         if (file_exists($path)) {
             unlink($path);
         }
-        move_uploaded_file($temp_name, $path); 
+        move_uploaded_file($temp_name, $path);
     } else {
         $_SESSION['lugarMessage'] = 'Extensión de imagen no desponible (usar solo jpg, jpeg o png)';
         $_SESSION['lugarStatus'] = 'danger';
@@ -36,7 +37,7 @@ if (strlen($_FILES['url_foto']['name']) > 0) {
     }
 }
 
-require 'database.php';
+require ROOT . '/utils/database.php';
 
 $con = connect();
 

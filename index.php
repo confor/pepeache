@@ -1,6 +1,9 @@
 <?php
-require 'utils/return_login.php';
-require_once 'utils/common.php';
+
+define('ROOT', '/var/www/html2/pepeache-patch-2');
+
+require ROOT . '/utils/return_login.php';
+require_once ROOT . '/utils/common.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,11 +16,11 @@ require_once 'utils/common.php';
     </head>
     <body class="sb-nav-fixed">
         <?php
-        require 'static/navbar.php';
+        require ROOT . '/static/navbar.php';
         ?>
         <div id="layoutSidenav">
             <?php
-            require 'static/sidebar.php';
+            require ROOT . '/static/sidebar.php';
             ?>
             <div id="layoutSidenav_content">
                 <main>
@@ -26,7 +29,7 @@ require_once 'utils/common.php';
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Tu cuenta</li>
                         </ol>
-                        <?php if (strlen($_SESSION['userMessage']) > 0) { ?>
+                        <?php if (isset($_SESSION['userMessage']) && strlen($_SESSION['userMessage']) > 0) { ?>
                             <div class="row">
                                 <div class="col-xl-3">
                                     <div class="card text-white mb-4 bg-opacity-50 bg-success">
@@ -70,7 +73,7 @@ require_once 'utils/common.php';
                     </div>
                 </main>
                 <?php
-                require 'static/footer.php';
+                require ROOT . '/static/footer.php';
                 ?>
             </div>
         </div>
