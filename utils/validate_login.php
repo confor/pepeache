@@ -7,7 +7,7 @@ if (strlen($_POST['email']) == 0 || strlen($_POST['pass']) == 0) {
     exit();
 }
 
-require 'database.php';
+require ROOT . '/utils/database.php';
 
 $con = connect();
 

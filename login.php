@@ -1,5 +1,7 @@
 <?php
 
+define('ROOT', '/var/www/html');
+
 session_start();
 
 if ($_SESSION['session'] == true) {
@@ -60,7 +62,7 @@ if ($_SESSION['validate'] == NULL) {
                 </main>
             </div>
             <?php
-            require 'static/footer.php';
+            require ROOT . '/static/footer.php';
             ?>
         </div>
     </body>

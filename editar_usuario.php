@@ -1,6 +1,9 @@
 <?php
-require 'utils/return_login.php';
-require_once 'utils/common.php';
+
+define('ROOT', '/var/www/html');
+
+require ROOT . '/utils/return_login.php';
+require_once ROOT . '/utils/common.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,11 +16,11 @@ require_once 'utils/common.php';
     </head>
     <body class="sb-nav-fixed">
         <?
-        require 'static/navbar.php';
+        require ROOT . '/static/navbar.php';
         ?>
         <div id="layoutSidenav">
             <?php
-            require 'static/sidebar.php';
+            require ROOT . '/static/sidebar.php';
             ?>
             <div id="layoutSidenav_content">
                 <main>
@@ -88,7 +91,7 @@ require_once 'utils/common.php';
                     </div>
                 </main>
                 <?php
-                require 'static/footer.php';
+                require ROOT . '/static/footer.php';
                 ?>
             </div>
         </div>

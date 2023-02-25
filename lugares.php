@@ -2,9 +2,9 @@
 
 # yo al ver este archivo
 # https://thumbs.dreamstime.com/z/depressed-emoticon-sad-hands-face-56094937.jpg
-
-require 'utils/return_login.php';
-require 'utils/database.php';
+define('ROOT', '/var/www/html');
+require ROOT . '/utils/return_login.php';
+require ROOT . '/utils/database.php';
 
 $con = connect();
 
@@ -24,11 +24,11 @@ $LUGARES = select_all($con, $sql);
     </head>
     <body class="sb-nav-fixed">
         <?php
-        require 'static/navbar.php';
+        require ROOT . '/static/navbar.php';
         ?>
         <div id="layoutSidenav">
             <?php
-            require 'static/sidebar.php';
+            require ROOT . '/static/sidebar.php';
             ?>
             <div id="layoutSidenav_content">
                 <main>
@@ -39,7 +39,7 @@ $LUGARES = select_all($con, $sql);
                         </ol>
                         <?php
 
-                        if (strlen($_SESSION['lugarMessage']) > 0) {
+                        if (isset($_SESSION['lugarMessage']) && strlen($_SESSION['lugarMessage']) > 0) {
                             echo '<div class="row">
                                     <div class="col-xl-3">
                                         <div class="card text-white mb-4 bg-opacity-50 bg-'.$_SESSION['lugarStatus'].'">
@@ -255,7 +255,7 @@ Lunes:Martes:Miércoles:Jueves:Viernes:Sábado:Domingo:</textarea>
                     </div>
                 </main>
                 <?php
-                include 'static/footer.php';
+                include ROOT . '/static/footer.php';
                 ?>
             </div>
         </div>
