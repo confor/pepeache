@@ -1,5 +1,6 @@
 <?php
 require 'utils/return_login.php';
+require_once 'utils/common.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,10 +56,6 @@ require 'utils/return_login.php';
                                     <div class="col-md-6">
                                         <label for="email" class="form-label">Correo electrónico</label>
                                         <input type="email" class="form-control" id="email" name="email" value="<?= out($_SESSION['email']) ?>" readonly>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="password" class="form-label">Contraseña</label>
-                                        <input type="password" class="form-control" id="password" name="password" value="<?= out($_SESSION['pass']) ?>" readonly>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="place" class="form-label">Lugar asociado</label>
