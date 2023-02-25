@@ -12,7 +12,7 @@ require_once 'utils/common.php';
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body class="sb-nav-fixed">
-        <?php
+        <?
         require 'static/navbar.php';
         ?>
         <div id="layoutSidenav">
@@ -78,8 +78,8 @@ require_once 'utils/common.php';
                                             <input type="password" class="form-control" id="password" name="password" required>
                                         </div>
                                         <div class="col-md-12 text-end">
-                                            <button class="btn btn-light" onclick="window.location.href='index.php'">Cancelar</button> <!-- no -->
-                                            <input class="btn btn-secondary" type="submit" value="Editar">
+                                            <a href="index.php" class="btn btn-light">Cancelar</a>
+                                            <input class="btn btn-secondary" type="submit" name="editar" value="Editar">
                                         </div>
                                     </div>
                                 </form>

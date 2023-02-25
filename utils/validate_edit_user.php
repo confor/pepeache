@@ -4,12 +4,15 @@ require 'return_login.php';
 
 require 'validate_rut.php';
 
-if (strlen($_POST['name']) == 0 || strlen($_POST['rut']) == 0 || strlen($_POST['email']) == 0 || strlen($_POST['new_password']) == 0 || strlen($_POST['rep_new_password']) == 0 || strlen($_POST['password']) == 0) {
-    header('Location: ../editar_usuario.php');
-    exit();
+
+foreach (['name', 'rut', 'email', 'new_password', 'rep_new_password', 'password'] as $required) {
+    if (array_key_exists($required, $_POST) !== true || strlen($_POST[$required]) === 0) {
+        header('Location: ../lugares.php');
+        exit();
+    }
 }
 
-if ($_POST['password'] != $_SESSION['pass']) { # ??? no!!!!!
+if (!password_verify($_POST['password'], $_SESSION['pass'])) {
     $_SESSION['editMessage'] = 'Contraseña actual incorrecta';
     header('Location: ../editar_usuario.php');
     exit();
@@ -26,16 +29,17 @@ if ($_POST['password'] != $_SESSION['pass']) { # ??? no!!!!!
 
     $con = connect();
 
-    # FIXME hay que hacer un hash con algún salt
+    $hash_pass = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+    
     $sql = 'UPDATE usuario SET nombre=?, correo=?, password=?, rut=? WHERE id_usuario=?';
-    $params = array($_POST['name'], $_POST['email'], $_POST['new_password'], $_POST['rut'], $_SESSION['id']);
+    $params = array($_POST['name'], $_POST['email'], $hash_pass, $_POST['rut'], $_SESSION['id']);
     $types = 'ssssi';
 
     edit($con, $sql, $types, $params); # TODO validar
 
     $_SESSION['name'] = $_POST['name'];
     $_SESSION['email'] = $_POST['email'];
-    $_SESSION['pass'] = $_POST['new_password']; # no!!!!!!!!!!
+    $_SESSION['pass'] = $hash_pass;
     $_SESSION['rut'] = $_POST['rut'];
 
     $_SESSION['userMessage'] = 'Usuario editado correctamente';

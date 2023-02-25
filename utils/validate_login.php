@@ -36,6 +36,8 @@ if (count($query) > 0) {
         $query_2 = select($con, $sql, $params);
         if (count($query_2) > 0) {
             $_SESSION['lugar'] = [$query_2[0]];
+        } else {
+            $_SESSION['lugar'] = 'No tiene lugar asignado';
         }
 
         $_SESSION['validate'] = 0;

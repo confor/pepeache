@@ -41,6 +41,7 @@ function edit($con, $sql, $types, $params) {
     $stmt = $con->prepare($sql);
     $stmt->bind_param($types, ...$params);
     $stmt->execute();
+    
 }
 
 function insert($con, $sql, $types, $params) {
