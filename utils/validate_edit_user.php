@@ -29,26 +29,44 @@ if (!password_verify($_POST['password'], $_SESSION['pass'])) {
 
     $con = connect();
 
-    $hash_pass = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+    $sql = 'SELECT * FROM usuario WHERE correo = ?';
+    $params = [$_POST['email']];
+    $types = 's';
 
-    $sql = 'UPDATE usuario SET nombre=?, correo=?, password=?, rut=? WHERE id_usuario=?';
-    $params = array($_POST['name'], $_POST['email'], $hash_pass, $_POST['rut'], $_SESSION['id']);
-    $types = 'ssssi';
-
-    $query = edit($con, $sql, $types, $params);
+    $query = select($con, $sql, $types, $params);
 
     if ($query === false) {
         $_SESSION['editMessage'] = 'Error en la base de datos';
         header('Location: ../editar_usuario.php');
         exit();
     } else {
-        $_SESSION['name'] = $_POST['name'];
-        $_SESSION['email'] = $_POST['email'];
-        $_SESSION['pass'] = $hash_pass;
-        $_SESSION['rut'] = $_POST['rut'];
+        if (count($query[0]) == 1 && $_SESSION['id'] != $query[0]['id_usuario']) {
+            $_SESSION['editMessage'] = 'Correo no disponible';
+            header('Location: ../editar_usuario.php');
+            exit();
+        } else {
+            $hash_pass = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
 
-        $_SESSION['userMessage'] = 'Usuario editado correctamente';
-        header('Location: ../index.php');
-        exit();
+            $sql = 'UPDATE usuario SET nombre=?, correo=?, password=?, rut=? WHERE id_usuario=?';
+            $params = array($_POST['name'], $_POST['email'], $hash_pass, $_POST['rut'], $_SESSION['id']);
+            $types = 'ssssi';
+
+            $query = edit($con, $sql, $types, $params);
+
+            if ($query === false) {
+                $_SESSION['editMessage'] = 'Error en la base de datos';
+                header('Location: ../editar_usuario.php');
+                exit();
+            } else {
+                $_SESSION['name'] = $_POST['name'];
+                $_SESSION['email'] = $_POST['email'];
+                $_SESSION['pass'] = $hash_pass;
+                $_SESSION['rut'] = $_POST['rut'];
+
+                $_SESSION['userMessage'] = 'Usuario editado correctamente';
+                header('Location: ../index.php');
+                exit();
+            }
+       }
     }
 }
