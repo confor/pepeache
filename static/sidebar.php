@@ -28,7 +28,7 @@ require_once ROOT . '/utils/common.php';
                     <a class="nav-link" href="usuarios.php">
                         Usuarios
                     </a>
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="opiniones.php">
                         Opiniones
                     </a>
                     <a class="nav-link" href="">
