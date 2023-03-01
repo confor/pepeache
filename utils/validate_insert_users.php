@@ -30,6 +30,7 @@ if (rut($_POST['rut']) == false) {
     $flag = false;
     exit();
 } 
+
 else {
     # repeat rut
     $sql = 'SELECT rut FROM usuario WHERE rut = ?';
@@ -56,7 +57,6 @@ else {
 # validar correo real (ask this uwu.)
 
 # # # #
-
 # repeat email
 $sql = 'SELECT correo FROM usuario WHERE correo = ?';
 $params = [$_POST['email']];

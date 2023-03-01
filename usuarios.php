@@ -68,7 +68,7 @@ $USUARIOS = select_all($con, $sql);
                                             echo '<a> hola </a>'; 
                                         } else {
                                             echo '
-                                        <form class="row g-3" action="utils/validate_insert_users.php" method="post" enctype="multipart/form-data">
+                                            <form class="row g-3" action="utils/validate_insert_users.php" method="post" enctype="multipart/form-data">
 
                                             <div class="col-md-6">
                                                 <label for="nombre" class="form-label">Nombre</label>
@@ -101,12 +101,11 @@ $USUARIOS = select_all($con, $sql);
                                                     <option value="1">Si</option>
                                                 </select>
                                             </div>
-
+                                        
                                             <div class="col-12 text-end">
                                                 <input class="btn btn-secondary" type="submit" value="Ingresar">';
                                         
                                         }
-                                        
                                         ?>
                                     </div>
                                 </form>
